@@ -55,21 +55,21 @@ final class TodoManager {
     func listTodos() {
         for (index, todo) in self.todoList.enumerated() {
             if let todoTitle = todo.title {
-                print("\(index + 1). \(todoTitle)")
+                print("\(index + 1). \(todo.isCompleted ? "✅": "❌") \(todoTitle)")
             }
         }
     }
     
     func addToDo(with title: String) {
-        
+        self.todoList.append(Todo(id: .init(), title: title, isCompleted: false))
     }
     
     func toggleCompletion(forTodoAtIndex index: Int) {
-        
+        self.todoList[index - 1].isCompleted = true
     }
     
     func deleteToDo(atIndex index: Int) {
-        
+        self.todoList.remove(at: index - 1)
     }
 
 }
@@ -91,4 +91,12 @@ var todo2 = Todo( id: .init(), title: "eat vegetable", isCompleted: false)
 
 let todoManager = TodoManager(todoList: [todo1, todo2])
 todoManager.listTodos()
-
+print("Now adding new todo")
+todoManager.addToDo(with: "go to doctor")
+todoManager.listTodos()
+print("Now toggle a finished todo")
+todoManager.toggleCompletion(forTodoAtIndex: 1)
+todoManager.listTodos()
+print("Now delet a finished todo")
+todoManager.deleteToDo(atIndex: 1)
+todoManager.listTodos()
