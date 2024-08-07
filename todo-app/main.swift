@@ -9,11 +9,16 @@ import Foundation
 
 // * Create the `Todo` struct.
 // * Ensure it has properties: id (UUID), title (String), and isCompleted (Bool).
-struct Todo {
+struct Todo: CustomStringConvertible, Codable{
     
     var id: UUID
     var title: String?
     var isCompleted: Bool
+    
+    // conforming to CustomStringConvertible
+    var description: String {
+        return "\(isCompleted ? "✅" : "❌") \(title!)"
+    }
 
 }
 
@@ -55,9 +60,7 @@ final class TodoManager {
     func listTodos() {
         print("📝 Your todos: \n")
         for (index, todo) in self.todoList.enumerated() {
-            if let todoTitle = todo.title {
-                print("\(index + 1). \(todo.isCompleted ? "✅": "❌") \(todoTitle)")
-            }
+            print("\(index + 1). \(todo)")
         }
     }
     

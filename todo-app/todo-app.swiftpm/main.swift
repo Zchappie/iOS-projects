@@ -9,11 +9,16 @@ import Foundation
 
 // * Create the `Todo` struct.
 // * Ensure it has properties: id (UUID), title (String), and isCompleted (Bool).
-struct Todo {
+struct Todo: CustomStringConvertible, Codable{
     
     var id: UUID
     var title: String?
     var isCompleted: Bool
+    
+    // conforming to CustomStringConvertible
+    var description: String {
+        return "\(isCompleted ? "✅" : "❌") \(title!)"
+    }
 
 }
 
@@ -53,23 +58,25 @@ final class TodoManager {
     }
     
     func listTodos() {
+        print("📝 Your todos: \n")
         for (index, todo) in self.todoList.enumerated() {
-            if let todoTitle = todo.title {
-                print("\(index + 1). \(todoTitle)")
-            }
+            print("\(index + 1). \(todo)")
         }
     }
     
     func addToDo(with title: String) {
-        
+        self.todoList.append(Todo(id: .init(), title: title, isCompleted: false))
+        print("\n📌 Todo added!\n")
     }
     
     func toggleCompletion(forTodoAtIndex index: Int) {
-        
+        self.todoList[index - 1].isCompleted = true
+        print("\n🔃 Todo completion status toggled!\n")
     }
     
     func deleteToDo(atIndex index: Int) {
-        
+        self.todoList.remove(at: index - 1)
+        print("\n🗑️ Todo deleted!\n")
     }
 
 }
@@ -81,14 +88,69 @@ final class TodoManager {
 //    such as `add`, `list`, `toggle`, `delete`, and `exit`.
 //  * The enum should be nested inside the definition of the `App` class
 final class App {
-
+    
+    enum Command: String {
+        case add
+        case list
+        case toggle
+        case delete
+        case exit
+    }
+    
+    func run() {
+        let todoManager = TodoManager(todoList: [])
+        print("🌟 Welcome to Todo CLI 🌟")
+        
+        while true {
+            print("What would you like to do? (add, list, toggle, delete, exit): ", terminator: "")
+            if let command = Command(rawValue: readLine()!) {
+                switch command {
+                case .add:
+                    print("\nEnter todo title: ", terminator: "")
+                    if let todoString = readLine() {
+                        todoManager.addToDo(with: todoString)
+                    }
+                    continue
+                case .list:
+                    todoManager.listTodos()
+                    continue
+                case .toggle:
+                    todoManager.listTodos()
+                    print("\nEnter the number of the todo to toggle: ", terminator: "")
+                    if let index = Int(readLine()!){
+                        todoManager.toggleCompletion(forTodoAtIndex: index)
+                    }
+                    continue
+                case .delete:
+                    todoManager.listTodos()
+                    print("\nEnter the number of the todo to delete: ", terminator: "")
+                    if let index = Int(readLine()!){
+                        todoManager.deleteToDo(atIndex: index)
+                    }
+                    continue
+                case .exit:
+                    exit(0)
+                }
+            }
+        }
+    }
 }
 
 
 // TODO: Write code to set up and run the app.
-var todo1 = Todo( id: .init(), title: "workout", isCompleted: false)
-var todo2 = Todo( id: .init(), title: "eat vegetable", isCompleted: false)
-
-let todoManager = TodoManager(todoList: [todo1, todo2])
-todoManager.listTodos()
-
+var app = App()
+app.run()
+//var todo1 = Todo( id: .init(), title: "workout", isCompleted: false)
+//var todo2 = Todo( id: .init(), title: "eat vegetable", isCompleted: false)
+//
+//let todoManager = TodoManager(todoList: [todo1, todo2])
+//todoManager.listTodos()
+//print("Now adding new todo")
+//todoManager.addToDo(with: "go to doctor")
+//todoManager.listTodos()
+//print("Now toggle a finished todo")
+//todoManager.toggleCompletion(forTodoAtIndex: 1)
+//todoManager.listTodos()
+//print("Now delet a finished todo")
+//todoManager.deleteToDo(atIndex: 1)
+//todoManager.listTodos()
