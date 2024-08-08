@@ -26,21 +26,56 @@ struct Todo: CustomStringConvertible, Codable{
 //  `func save(todos: [Todo])`: Persists the given todos.
 //  `func load() -> [Todo]?`: Retrieves and returns the saved todos, or nil if none exist.
 protocol Cache {
-
+    func save(todos: [Todo])
+    func load() -> [Todo]?
 }
 
 // `FileSystemCache`: This implementation should utilize the file system
 // to persist and retrieve the list of todos.
 // Utilize Swift's `FileManager` to handle file operations.
 final class JSONFileManagerCache: Cache {
-
+    let filePath = "log.json"
+    
+    func save(todos: [Todo]) {
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(filePath)
+        do {
+            let encoder = JSONEncoder()
+            let jsonData = try encoder.encode(todos)
+            try jsonData.write(to: fileURL)
+            print("Encoded JSON to: \(filePath)")
+        } catch {
+            print("Fail to save the todos a local file")
+        }
+    }
+    
+    func load() -> [Todo]? {
+        do{
+            let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(filePath)
+            do {
+                // Read the contents of the file and decoded back to JSON format
+                let contents = try Data(contentsOf: fileURL)
+                let decoder = JSONDecoder()
+                let decodedTodos = try decoder.decode([Todo].self, from: contents)
+                print("Decoded Todo: \(decodedTodos)")
+                return decodedTodos
+            } catch {
+                print("Error encoding or decoding: \(error)")
+                return nil
+            }
+        }
+    }
 }
 
 // `InMemoryCache`: : Keeps todos in an array or similar structure during the session.
 // This won't retain todos across different app launches,
 // but serves as a quick in-session cache.
 final class InMemoryCache: Cache {
-
+    func save(todos: [Todo]) {
+        
+    }
+    func load() -> [Todo]? {
+        return nil
+    }
 }
 
 // The `TodosManager` class should have:
