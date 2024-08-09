@@ -34,34 +34,44 @@ protocol Cache {
 // to persist and retrieve the list of todos.
 // Utilize Swift's `FileManager` to handle file operations.
 final class JSONFileManagerCache: Cache {
-    let filePath = "log.json"
+    
+    private let filePath: String
+    private let fileManager: FileManager
+    private let currentDirectory: String
+    private let logURL: URL
+    
+    private let encoder: JSONEncoder
+    private let decoder: JSONDecoder
+    
+    init(){
+        self.filePath = "log.json"
+        self.fileManager = FileManager.default
+        self.currentDirectory = fileManager.currentDirectoryPath
+        self.logURL = URL(fileURLWithPath: "\(self.currentDirectory)/\(filePath)")
+        self.encoder = JSONEncoder()
+        self.decoder = JSONDecoder()
+    }
     
     func save(todos: [Todo]) {
-        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(filePath)
+        
         do {
-            let encoder = JSONEncoder()
-            let jsonData = try encoder.encode(todos)
-            try jsonData.write(to: fileURL)
-            print("Encoded JSON to: \(filePath)")
+            let jsonData = try self.encoder.encode(todos)
+            try jsonData.write(to: self.logURL)
+            print("Encoded JSON to: \(self.filePath)")
         } catch {
             print("Fail to save the todos a local file")
         }
     }
     
     func load() -> [Todo]? {
-        do{
-            let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(filePath)
-            do {
-                // Read the contents of the file and decoded back to JSON format
-                let contents = try Data(contentsOf: fileURL)
-                let decoder = JSONDecoder()
-                let decodedTodos = try decoder.decode([Todo].self, from: contents)
-                print("Decoded Todo: \(decodedTodos)")
-                return decodedTodos
-            } catch {
-                print("Error encoding or decoding: \(error)")
-                return nil
-            }
+        do {
+            let contents = try Data(contentsOf: self.logURL)
+            let decodedTodos = try self.decoder.decode([Todo].self, from: contents)
+            print("Decoded Todo: \(decodedTodos)")
+            return decodedTodos
+        } catch {
+            print("Error encoding or decoding: \(error)")
+            return nil
         }
     }
 }
@@ -173,19 +183,12 @@ final class App {
 
 
 // TODO: Write code to set up and run the app.
-var app = App()
-app.run()
-//var todo1 = Todo( id: .init(), title: "workout", isCompleted: false)
-//var todo2 = Todo( id: .init(), title: "eat vegetable", isCompleted: false)
-//
-//let todoManager = TodoManager(todoList: [todo1, todo2])
-//todoManager.listTodos()
-//print("Now adding new todo")
-//todoManager.addToDo(with: "go to doctor")
-//todoManager.listTodos()
-//print("Now toggle a finished todo")
-//todoManager.toggleCompletion(forTodoAtIndex: 1)
-//todoManager.listTodos()
-//print("Now delet a finished todo")
-//todoManager.deleteToDo(atIndex: 1)
-//todoManager.listTodos()
+//var app = App()
+//app.run()
+var todo1 = Todo( id: .init(), title: "workout", isCompleted: false)
+var todo2 = Todo( id: .init(), title: "eat vegetable", isCompleted: false)
+
+let todoManager = TodoManager(todoList: [todo1, todo2])
+var jsonCache = JSONFileManagerCache()
+jsonCache.save(todos: todoManager.todoList)
+todoManager.todoList = jsonCache.load()!
