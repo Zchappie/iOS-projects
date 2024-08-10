@@ -57,7 +57,6 @@ final class JSONFileManagerCache: Cache {
         do {
             let jsonData = try self.encoder.encode(todos)
             try jsonData.write(to: self.logURL)
-            print("Encoded JSON to: \(self.filePath)")
         } catch {
             print("Fail to save the todos a local file")
         }
@@ -80,11 +79,13 @@ final class JSONFileManagerCache: Cache {
 // This won't retain todos across different app launches,
 // but serves as a quick in-session cache.
 final class InMemoryCache: Cache {
+    private var todoCache: [Todo] = []
+    
     func save(todos: [Todo]) {
-        
+        self.todoCache = todos
     }
     func load() -> [Todo]? {
-        return nil
+        return self.todoCache.isEmpty ? nil : self.todoCache
     }
 }
 
@@ -96,10 +97,14 @@ final class InMemoryCache: Cache {
 // * A function named `func deleteTodo(atIndex index: Int)` to remove a todo using its index.
 final class TodoManager {
     
-    var todoList: Array<Todo>
+    var todoList: [Todo] = []
+    private var cache: Cache
     
-    init(todoList: Array<Todo>) {
-        self.todoList = todoList
+    init(cache: Cache) {
+        self.cache = cache
+        if let todoList = cache.load() {
+            self.todoList = todoList
+        }
     }
     
     func listTodos() {
@@ -111,16 +116,19 @@ final class TodoManager {
     
     func addToDo(with title: String) {
         self.todoList.append(Todo(id: .init(), title: title, isCompleted: false))
+        self.cache.save(todos: self.todoList)
         print("\n📌 Todo added!\n")
     }
     
     func toggleCompletion(forTodoAtIndex index: Int) {
         self.todoList[index - 1].isCompleted = true
+        self.cache.save(todos: self.todoList)
         print("\n🔃 Todo completion status toggled!\n")
     }
     
     func deleteToDo(atIndex index: Int) {
         self.todoList.remove(at: index - 1)
+        self.cache.save(todos: self.todoList)
         print("\n🗑️ Todo deleted!\n")
     }
 
@@ -134,6 +142,16 @@ final class TodoManager {
 //  * The enum should be nested inside the definition of the `App` class
 final class App {
     
+    private var jsonCache = JSONFileManagerCache()
+    private var todoManager = TodoManager(cache: InMemoryCache())
+    
+    init() {
+        guard let loadedTodoList = self.jsonCache.load() else {
+            return
+        }
+        self.todoManager.todoList = loadedTodoList
+    }
+    
     enum Command: String {
         case add
         case list
@@ -143,7 +161,6 @@ final class App {
     }
     
     func run() {
-        let todoManager = TodoManager(todoList: [])
         print("🌟 Welcome to Todo CLI 🌟")
         
         while true {
@@ -155,6 +172,7 @@ final class App {
                     if let todoString = readLine() {
                         todoManager.addToDo(with: todoString)
                     }
+                    jsonCache.save(todos: todoManager.todoList)
                     continue
                 case .list:
                     todoManager.listTodos()
@@ -165,6 +183,7 @@ final class App {
                     if let index = Int(readLine()!){
                         todoManager.toggleCompletion(forTodoAtIndex: index)
                     }
+                    jsonCache.save(todos: todoManager.todoList)
                     continue
                 case .delete:
                     todoManager.listTodos()
@@ -172,6 +191,7 @@ final class App {
                     if let index = Int(readLine()!){
                         todoManager.deleteToDo(atIndex: index)
                     }
+                    jsonCache.save(todos: todoManager.todoList)
                     continue
                 case .exit:
                     exit(0)
@@ -183,12 +203,5 @@ final class App {
 
 
 // TODO: Write code to set up and run the app.
-//var app = App()
-//app.run()
-var todo1 = Todo( id: .init(), title: "workout", isCompleted: false)
-var todo2 = Todo( id: .init(), title: "eat vegetable", isCompleted: false)
-
-let todoManager = TodoManager(todoList: [todo1, todo2])
-var jsonCache = JSONFileManagerCache()
-jsonCache.save(todos: todoManager.todoList)
-todoManager.todoList = jsonCache.load()!
+var app = App()
+app.run()
