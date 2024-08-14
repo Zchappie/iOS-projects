@@ -121,15 +121,23 @@ final class TodoManager {
     }
     
     func toggleCompletion(forTodoAtIndex index: Int) {
-        self.todoList[index - 1].isCompleted = true
-        self.cache.save(todos: self.todoList)
-        print("\n🔃 Todo completion status toggled!\n")
+        if index > 0 && index <= self.todoList.count {
+            self.todoList[index - 1].isCompleted = true
+            self.cache.save(todos: self.todoList)
+            print("\n🔃 Todo completion status toggled!\n")
+        } else {
+            print("\n⚠️ Incorrect selection.\n")
+        }
     }
     
     func deleteToDo(atIndex index: Int) {
-        self.todoList.remove(at: index - 1)
-        self.cache.save(todos: self.todoList)
-        print("\n🗑️ Todo deleted!\n")
+        if index > 0 && index <= self.todoList.count {
+            self.todoList.remove(at: index - 1)
+            self.cache.save(todos: self.todoList)
+            print("\n🗑️ Todo deleted!\n")
+        } else {
+            print("\n⚠️ Incorrect selection.\n")
+        }
     }
 
 }
