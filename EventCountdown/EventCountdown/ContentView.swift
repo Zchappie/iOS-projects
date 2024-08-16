@@ -8,24 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
-    let events: [Event]
+//    let events: [Event]
     
     var body: some View {
         NavigationStack {
-            List(events, id: \.self) {
-                event in
-                NavigationLink(value: event) {
-                    EventSummary (event: event)
-                }
-            }
-            .navigationDestination(for: Event.self) {
-//                event in EventDetail(event: event)
-            }
+//            List(events, id: \.self) {
+//                event in
+//                NavigationLink(value: event) {
+////                    EventSummary (event: event)
+//                }
+//            }
+//            .navigationDestination(for: Event.self) {
+////                event in EventDetail(event: event)
+//            }
         }
     }
 }
 
 #Preview {
-    ContentView(events: [
-        Event(id: UUID(), title: "birthday", date: Date(), textColor: Color.red)])
+    ContentView()
 }

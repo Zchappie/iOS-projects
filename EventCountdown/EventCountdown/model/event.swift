@@ -1,8 +1,8 @@
 //
-//  EventModel.swift
+//  event.swift
 //  EventCountdown
 //
-//  Created by Liu on 15.08.24.
+//  Created by Liu on 16.08.24.
 //
 
 import Foundation
