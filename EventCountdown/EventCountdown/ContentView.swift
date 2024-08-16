@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    let events: [Event]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List(events, id: \.self) {
+                event in
+                NavigationLink(value: event) {
+                    EventSummary (event: event)
+                }
+            }
+            .navigationDestination(for: Event.self) {
+//                event in EventDetail(event: event)
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(events: [
+        Event(id: UUID(), title: "birthday", date: Date(), textColor: Color.red)])
 }

@@ -14,6 +14,8 @@
 		1B15FC252C6DF4FE00189259 /* EventCountdownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC242C6DF4FE00189259 /* EventCountdownTests.swift */; };
 		1B15FC2F2C6DF4FE00189259 /* EventCountdownUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC2E2C6DF4FE00189259 /* EventCountdownUITests.swift */; };
 		1B15FC312C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC302C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift */; };
+		1B15FC402C6DFB9600189259 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC3F2C6DFB9600189259 /* EventModel.swift */; };
+		1B15FC432C6E3BEF00189259 /* EventSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC422C6E3BEF00189259 /* EventSummary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		1B15FC2A2C6DF4FE00189259 /* EventCountdownUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventCountdownUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B15FC2E2C6DF4FE00189259 /* EventCountdownUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCountdownUITests.swift; sourceTree = "<group>"; };
 		1B15FC302C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCountdownUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1B15FC3F2C6DFB9600189259 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		1B15FC422C6E3BEF00189259 /* EventSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSummary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 			children = (
 				1B15FC132C6DF4FD00189259 /* EventCountdownApp.swift */,
 				1B15FC152C6DF4FD00189259 /* ContentView.swift */,
+				1B15FC412C6E390D00189259 /* views */,
+				1B15FC3F2C6DFB9600189259 /* EventModel.swift */,
 				1B15FC172C6DF4FE00189259 /* Assets.xcassets */,
 				1B15FC192C6DF4FE00189259 /* Preview Content */,
 			);
@@ -125,6 +131,14 @@
 				1B15FC302C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift */,
 			);
 			path = EventCountdownUITests;
+			sourceTree = "<group>";
+		};
+		1B15FC412C6E390D00189259 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				1B15FC422C6E3BEF00189259 /* EventSummary.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +272,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B15FC162C6DF4FD00189259 /* ContentView.swift in Sources */,
+				1B15FC432C6E3BEF00189259 /* EventSummary.swift in Sources */,
+				1B15FC402C6DFB9600189259 /* EventModel.swift in Sources */,
 				1B15FC142C6DF4FD00189259 /* EventCountdownApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
