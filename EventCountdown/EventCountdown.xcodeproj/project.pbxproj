@@ -16,6 +16,7 @@
 		1B15FC312C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC302C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift */; };
 		1B1BEC8B2C6F79A100C83485 /* eventEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8A2C6F79A100C83485 /* eventEditorView.swift */; };
 		1B1BEC8E2C6F7A9100C83485 /* event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8D2C6F7A9100C83485 /* event.swift */; };
+		1B1BEC902C6F9C1700C83485 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8F2C6F9C1700C83485 /* Cache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		1B15FC302C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCountdownUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1B1BEC8A2C6F79A100C83485 /* eventEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventEditorView.swift; sourceTree = "<group>"; };
 		1B1BEC8D2C6F7A9100C83485 /* event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event.swift; sourceTree = "<group>"; };
+		1B1BEC8F2C6F9C1700C83485 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				1B1BEC8D2C6F7A9100C83485 /* event.swift */,
+				1B1BEC8F2C6F9C1700C83485 /* Cache.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B1BEC8E2C6F7A9100C83485 /* event.swift in Sources */,
+				1B1BEC902C6F9C1700C83485 /* Cache.swift in Sources */,
 				1B1BEC8B2C6F79A100C83485 /* eventEditorView.swift in Sources */,
 				1B15FC162C6DF4FD00189259 /* ContentView.swift in Sources */,
 				1B15FC142C6DF4FD00189259 /* EventCountdownApp.swift in Sources */,

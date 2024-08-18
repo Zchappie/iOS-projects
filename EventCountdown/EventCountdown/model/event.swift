@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Event: Comparable, Identifiable {
+struct Event: Comparable, Identifiable, Hashable, Codable {
     var id: UUID
     var title: String
     var date: Date

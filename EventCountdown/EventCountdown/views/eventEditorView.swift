@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct eventEditorView: View {
-    @State var event = Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red)
+    @State var event : Event
+    
+    init(event: Event) {
+        self.event = event
+    }
     
     var body: some View {
         VStack {
@@ -35,5 +39,5 @@ struct eventEditorView: View {
 }
 
 #Preview {
-    eventEditorView()
+    eventEditorView(event: Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red))
 }
