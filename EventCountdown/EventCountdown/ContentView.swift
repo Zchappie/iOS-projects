@@ -13,12 +13,18 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            Text("Events")
             NavigationStack {
-                List(events, id: \.self) { event in
-                    NavigationLink(value: event){
-                        EventSummaryView(event: event)
+                List(events.indices, id: \.self) { idx in
+                    NavigationLink(value: events[idx]){
+                        EventSummaryView(event: events[idx])
+                            .swipeActions {
+                                Button("Delete") {
+                                    events.remove(at: idx)
+                                }
+                                .tint(.red)
+                            }
                     }
+                    .navigationTitle("Event")
                 }
                 .navigationDestination(for: Event.self) { event in
                     eventEditorView(event: event)
