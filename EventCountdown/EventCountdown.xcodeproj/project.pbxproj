@@ -14,6 +14,8 @@
 		1B15FC252C6DF4FE00189259 /* EventCountdownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC242C6DF4FE00189259 /* EventCountdownTests.swift */; };
 		1B15FC2F2C6DF4FE00189259 /* EventCountdownUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC2E2C6DF4FE00189259 /* EventCountdownUITests.swift */; };
 		1B15FC312C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC302C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift */; };
+		1B15FC452C71B25600189259 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC442C71B25600189259 /* CodableColor.swift */; };
+		1B15FC472C7227B100189259 /* EventSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC462C7227B100189259 /* EventSummaryView.swift */; };
 		1B1BEC8B2C6F79A100C83485 /* eventEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8A2C6F79A100C83485 /* eventEditorView.swift */; };
 		1B1BEC8E2C6F7A9100C83485 /* event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8D2C6F7A9100C83485 /* event.swift */; };
 		1B1BEC902C6F9C1700C83485 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8F2C6F9C1700C83485 /* Cache.swift */; };
@@ -47,6 +49,8 @@
 		1B15FC2A2C6DF4FE00189259 /* EventCountdownUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventCountdownUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B15FC2E2C6DF4FE00189259 /* EventCountdownUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCountdownUITests.swift; sourceTree = "<group>"; };
 		1B15FC302C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCountdownUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1B15FC442C71B25600189259 /* CodableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableColor.swift; sourceTree = "<group>"; };
+		1B15FC462C7227B100189259 /* EventSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSummaryView.swift; sourceTree = "<group>"; };
 		1B1BEC8A2C6F79A100C83485 /* eventEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventEditorView.swift; sourceTree = "<group>"; };
 		1B1BEC8D2C6F7A9100C83485 /* event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event.swift; sourceTree = "<group>"; };
 		1B1BEC8F2C6F9C1700C83485 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				1B1BEC8A2C6F79A100C83485 /* eventEditorView.swift */,
+				1B15FC462C7227B100189259 /* EventSummaryView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 			children = (
 				1B1BEC8D2C6F7A9100C83485 /* event.swift */,
 				1B1BEC8F2C6F9C1700C83485 /* Cache.swift */,
+				1B15FC442C71B25600189259 /* CodableColor.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -284,9 +290,11 @@
 			files = (
 				1B1BEC8E2C6F7A9100C83485 /* event.swift in Sources */,
 				1B1BEC902C6F9C1700C83485 /* Cache.swift in Sources */,
+				1B15FC452C71B25600189259 /* CodableColor.swift in Sources */,
 				1B1BEC8B2C6F79A100C83485 /* eventEditorView.swift in Sources */,
 				1B15FC162C6DF4FD00189259 /* ContentView.swift in Sources */,
 				1B15FC142C6DF4FD00189259 /* EventCountdownApp.swift in Sources */,
+				1B15FC472C7227B100189259 /* EventSummaryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

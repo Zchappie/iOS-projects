@@ -16,12 +16,6 @@ struct eventEditorView: View {
     
     var body: some View {
         VStack {
-//            Text("Edit \(event.title)")
-//                .padding(.top, 9.5)
-//                .padding(.bottom, 8)
-//                .frame(minWidth: 0, maxWidth: .infinity)
-//                .background(Color(UIColor.secondarySystemGroupedBackground))
-//                .font(.title3)
             Form {
                 Section(header: Text("Edit  \(event.title)")) {
                     TextField("Name", text: $event.title)
