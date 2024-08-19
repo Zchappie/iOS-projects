@@ -14,8 +14,7 @@ struct ContentView: View {
     var body: some View {
         VStack{
             NavigationStack {
-                List(events.indices, id: \.self) { idx in
-                    NavigationLink(value: events[idx]){
+                List(events.indices, id: \.self) { idx in NavigationLink(value: events[idx]) {
                         EventSummaryView(event: events[idx])
                             .swipeActions {
                                 Button("Delete") {
@@ -23,11 +22,23 @@ struct ContentView: View {
                                 }
                                 .tint(.red)
                             }
+                            .onTapGesture {
+                            }
                     }
                     .navigationTitle("Event")
                 }
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction){
+                        NavigationLink {
+                            let newEvent = Event(id: .init(), title: "", date: Date.now, textColor: .black)
+                            eventEditorView(event: newEvent, formType: .add)
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                    }
+                }
                 .navigationDestination(for: Event.self) { event in
-                    eventEditorView(event: event)
+                    eventEditorView(event: event, formType: .edit)
                 }
             }
         }
