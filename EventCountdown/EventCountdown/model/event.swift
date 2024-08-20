@@ -17,7 +17,6 @@ struct Event: Comparable, Identifiable, Codable, Hashable {
     var date: Date
     var textColor: Color
     
-    
     // conform to Comparable: only comparing date
     static func < (lhs: Event, rhs: Event) -> Bool {
         return lhs.date < rhs.date

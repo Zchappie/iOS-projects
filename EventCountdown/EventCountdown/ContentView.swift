@@ -16,15 +16,19 @@ struct ContentView: View {
             NavigationStack {
                 if events.isEmpty {
                     VStack {
-                        Image(systemName: "calendar")
-                            .font(.system(size: 60, weight: .ultraLight))
-                            .foregroundStyle(Color.gray.opacity(0.3))
+                        VStack{
+                            Image(systemName: "flag.checkered.2.crossed")
+                                .font(.system(size: 60, weight: .ultraLight))
+                                .foregroundStyle(Color.gray.opacity(0.3))
+                            Text("No coming events")
+                                .foregroundStyle(Color.gray.opacity(0.3))
+                        }
                        .padding()
                         NavigationLink {
                             let newEvent = Event(id: .init(), title: "", date: Date.now, textColor: .black)
                             eventEditorView(event: newEvent, formType: .add)
                         } label: {
-                            Text("Add first event")
+                            Text("Create first event")
                         }
                         .navigationTitle("Event")
                     }

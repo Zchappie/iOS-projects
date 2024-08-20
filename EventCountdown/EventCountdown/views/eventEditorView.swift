@@ -5,19 +5,24 @@
 //  Created by Liu on 16.08.24.
 //
 
+import Foundation
 import SwiftUI
 
 struct eventEditorView: View {
-    @State var event : Event
+    @State var event: Event
+    let formType: FormType
     
-    init(event: Event) {
+    @Environment(\.dismiss) var dismiss
+    
+    init(event: Event, formType: FormType) {
         self.event = event
+        self.formType = formType
     }
     
     var body: some View {
         VStack {
             Form {
-                Section(header: Text("Edit  \(event.title)")) {
+                Section("Edit Options") {
                     TextField("Name", text: $event.title)
                         .foregroundColor(event.textColor)
                     DatePicker(
@@ -29,9 +34,25 @@ struct eventEditorView: View {
                 }
             }
         }
+        .navigationTitle(formType == .edit ? "Edit \(event.title)" : "Add")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Save") {
+                    dismiss()
+                }
+                .fontWeight(.semibold)
+            }
+        }
     }
 }
 
 #Preview {
-    eventEditorView(event: Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red))
+    eventEditorView(event: Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red), formType: .edit)
+}
+
+// Add enum to enter different views
+enum FormType {
+    case add
+    case edit
 }
