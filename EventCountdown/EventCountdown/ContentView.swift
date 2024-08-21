@@ -25,8 +25,7 @@ struct ContentView: View {
                         }
                        .padding()
                         NavigationLink {
-                            let newEvent = Event(id: .init(), title: "", date: Date.now, textColor: .black)
-                            eventEditorView(event: newEvent, formType: .add)
+                            eventEditorView(formType: .add, onSave: { newEvent in events.append(newEvent)})
                         } label: {
                             Text("Create first event")
                         }
@@ -48,13 +47,13 @@ struct ContentView: View {
                     }
                     
                     .navigationDestination(for: Event.self) { event in
-                        eventEditorView(event: event, formType: .edit)
+                        eventEditorView(formType: .edit(event), onSave: {event in replaceEvent(event: event, events: &events)})
                     }
                     .toolbar {
                         ToolbarItem(placement: .primaryAction){
                             NavigationLink {
                                 let newEvent = Event(id: .init(), title: "", date: Date.now, textColor: .black)
-                                eventEditorView(event: newEvent, formType: .add)
+                                eventEditorView(formType: .add, onSave: {newEvent in events.append(newEvent)})
                             } label: {
                                 Image(systemName: "plus")
                             }
@@ -70,4 +69,10 @@ struct ContentView: View {
     ContentView(events: [
 //        Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red), Event(id: .init(), title: "🏝️ Holiday", date: .init(), textColor: .blue)
     ])
+}
+
+func replaceEvent(event: Event, events: inout [Event]) {
+    if let index = events.firstIndex(where: { $0.id == event.id }) {
+        events[index] = event
+    }
 }

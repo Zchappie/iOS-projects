@@ -9,50 +9,76 @@ import Foundation
 import SwiftUI
 
 struct eventEditorView: View {
-    @State var event: Event
-    let formType: FormType
+    @State private var id: UUID = UUID()
+    @State private var title: String = ""
+    @State private var date: Date = Date()
+    @State private var textColor: Color = .black
+    var onSave: (Event) -> Void
+    var formType: FormType
     
     @Environment(\.dismiss) var dismiss
     
-    init(event: Event, formType: FormType) {
-        self.event = event
+    
+    // Initializer to set up the state variables based on the mode
+    init(formType: FormType, onSave: @escaping (Event) -> Void) {
         self.formType = formType
+        self.onSave = onSave
+        
+        switch formType {
+        case .add:
+            _id = State(initialValue: UUID())
+            _title = State(initialValue: "")
+            _date = State(initialValue: Date())
+            _textColor = State(initialValue: .black)
+        case .edit(let event):
+            _id = State(initialValue: event.id)
+            _title = State(initialValue: event.title)
+            _date = State(initialValue: event.date)
+            _textColor = State(initialValue: event.textColor)
+        }
     }
     
     var body: some View {
         VStack {
             Form {
                 Section("Edit Options") {
-                    TextField("Name", text: $event.title)
-                        .foregroundColor(event.textColor)
+                    TextField("Name", text: $title)
+                        .foregroundColor(textColor)
                     DatePicker(
                         "Date",
-                         selection: $event.date,
-                         displayedComponents: [.date, .hourAndMinute]
+                        selection: $date,
+                        displayedComponents: [.date, .hourAndMinute]
                     )
-                    ColorPicker("Text color", selection: $event.textColor)
+                    ColorPicker("Text color", selection: $textColor)
                 }
             }
-        }
-        .navigationTitle(formType == .edit ? "Edit \(event.title)" : "Add")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button("Save") {
-                    dismiss()
+            .navigationTitle("Edit \(title)")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Save") {
+                        let updatedEvent = Event(id: id, title: title, date: date, textColor: textColor)
+                        onSave(updatedEvent)
+                        dismiss()
+                    }
+                    .fontWeight(.semibold)
                 }
-                .fontWeight(.semibold)
             }
         }
     }
 }
 
 #Preview {
-    eventEditorView(event: Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red), formType: .edit)
+    eventEditorView(formType: .add, onSave: {event in
+        var events = [
+                Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red), Event(id: .init(), title: "🏝️ Holiday", date: .init(), textColor: .blue)
+            ]
+        events.append(event)})
 }
 
 // Add enum to enter different views
 enum FormType {
     case add
-    case edit
+    case edit(Event)
 }
+

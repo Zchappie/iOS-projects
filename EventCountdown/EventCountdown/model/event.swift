@@ -17,6 +17,22 @@ struct Event: Comparable, Identifiable, Codable, Hashable {
     var date: Date
     var textColor: Color
     
+    // default no arg initializer
+    init() {
+        id = .init()
+        title = ""
+        date = Date.now
+        textColor = .black
+    }
+    
+    // customized initialization
+    init(id: UUID, title: String, date: Date, textColor: Color) {
+            self.id = id
+            self.title = title
+            self.date = date
+            self.textColor = textColor
+        }
+    
     // conform to Comparable: only comparing date
     static func < (lhs: Event, rhs: Event) -> Bool {
         return lhs.date < rhs.date
