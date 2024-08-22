@@ -19,7 +19,7 @@ struct Event: Comparable, Identifiable, Codable, Hashable {
     
     // default no arg initializer
     init() {
-        id = .init()
+        id = UUID()
         title = ""
         date = Date.now
         textColor = .black

@@ -24,7 +24,7 @@ struct EventCountdownApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(events: events)
+            EventsView(events: events)
         }
     }
 }

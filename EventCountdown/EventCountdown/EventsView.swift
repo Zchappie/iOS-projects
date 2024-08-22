@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct EventsView: View {
     
     @State var events: [Event]
     
@@ -25,7 +25,7 @@ struct ContentView: View {
                         }
                        .padding()
                         NavigationLink {
-                            eventEditorView(formType: .add, onSave: { newEvent in events.append(newEvent)})
+                            EventForm(formType: .add, onSave: { newEvent in events.append(newEvent)})
                         } label: {
                             Text("Create first event")
                         }
@@ -33,7 +33,7 @@ struct ContentView: View {
                     }
                 } else {
                     List(events.indices, id: \.self) { idx in NavigationLink(value: events[idx]) {
-                            EventSummaryView(event: events[idx])
+                            EventRow(event: $events[idx])
                                 .swipeActions {
                                     Button("Delete") {
                                         events.remove(at: idx)
@@ -47,12 +47,12 @@ struct ContentView: View {
                     }
                     
                     .navigationDestination(for: Event.self) { event in
-                        eventEditorView(formType: .edit(event), onSave: {event in updateEventsAndSortBaseOnDate(event: event, events: &events)})
+                        EventForm(formType: .edit(event), onSave: {event in updateEventsAndSortBaseOnDate(event: event, events: &events)})
                     }
                     .toolbar {
                         ToolbarItem(placement: .primaryAction){
                             NavigationLink {
-                                eventEditorView(formType: .add, onSave: {event in updateEventsAndSortBaseOnDate(event: event, events: &events)})
+                                EventForm(formType: .add, onSave: {event in updateEventsAndSortBaseOnDate(event: event, events: &events)})
                             } label: {
                                 Image(systemName: "plus")
                             }
@@ -65,7 +65,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(events: [
+    EventsView(events: [
 //        Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red), Event(id: .init(), title: "🏝️ Holiday", date: .init(), textColor: .blue)
     ])
 }
@@ -73,7 +73,9 @@ struct ContentView: View {
 func updateEventsAndSortBaseOnDate(event: Event, events: inout [Event]) {
     if let index = events.firstIndex(where: { $0.id == event.id }) {
         events[index] = event
+        print("Update result \(events[index].title)")
     } else {
+        print("Not finding event in the list")
         events.append(event)
     }
     events.sort{ $0.date < $1.date }

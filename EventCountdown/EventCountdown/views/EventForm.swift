@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct eventEditorView: View {
+struct EventForm: View {
     @State private var id: UUID = UUID()
     @State private var title: String = ""
     @State private var date: Date = Date()
@@ -18,6 +18,8 @@ struct eventEditorView: View {
     
     // using key path to point to a provided environment values by SwiftUI, without caring the detailed implementation. e.g., what to dismiss.
     @Environment(\.dismiss) var dismiss
+    
+    @State private var navigationTitle: String = ""
     
     init(formType: FormType, onSave: @escaping (Event) -> Void) {
         self.formType = formType
@@ -29,8 +31,9 @@ struct eventEditorView: View {
         case .add:
             _id = State(initialValue: UUID())
             _title = State(initialValue: "")
-            _date = State(initialValue: Date())
+            _date = State(initialValue: .now)
             _textColor = State(initialValue: .black)
+            print("New event added")
         case .edit(let event):
             _id = State(initialValue: event.id)
             _title = State(initialValue: event.title)
@@ -53,13 +56,14 @@ struct eventEditorView: View {
                     ColorPicker("Text color", selection: $textColor)
                 }
             }
-            .navigationTitle("Edit \(title)")
+            .navigationTitle("\(titleForFormType(formType)) \(title)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
-                        let updatedEvent = Event(id: id, title: title.trimmingCharacters(in: .whitespaces), date: date, textColor: textColor)
+                        let updatedEvent = Event(id: id, title: title, date: date, textColor: textColor)
                         onSave(updatedEvent)
+                        print("\(updatedEvent.title), \(updatedEvent.date), \(updatedEvent.textColor)")
                         dismiss()
                     }
                     .fontWeight(.semibold)
@@ -71,7 +75,7 @@ struct eventEditorView: View {
 }
 
 #Preview {
-    eventEditorView(formType: .add, onSave: {event in
+    EventForm(formType: .add, onSave: {event in
         var events = [
                 Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red), Event(id: .init(), title: "🏝️ Holiday", date: .init(), textColor: .blue)
             ]
@@ -84,3 +88,11 @@ enum FormType {
     case edit(Event)
 }
 
+func titleForFormType(_ formType: FormType) -> String {
+    switch formType {
+    case .add:
+        return "Add"
+    case .edit(_):
+        return "Edit"
+    }
+}

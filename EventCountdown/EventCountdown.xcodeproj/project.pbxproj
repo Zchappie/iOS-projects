@@ -8,19 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1B15FC142C6DF4FD00189259 /* EventCountdownApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC132C6DF4FD00189259 /* EventCountdownApp.swift */; };
-		1B15FC162C6DF4FD00189259 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC152C6DF4FD00189259 /* ContentView.swift */; };
+		1B15FC162C6DF4FD00189259 /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC152C6DF4FD00189259 /* EventsView.swift */; };
 		1B15FC182C6DF4FE00189259 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B15FC172C6DF4FE00189259 /* Assets.xcassets */; };
 		1B15FC1B2C6DF4FE00189259 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B15FC1A2C6DF4FE00189259 /* Preview Assets.xcassets */; };
 		1B15FC252C6DF4FE00189259 /* EventCountdownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC242C6DF4FE00189259 /* EventCountdownTests.swift */; };
 		1B15FC2F2C6DF4FE00189259 /* EventCountdownUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC2E2C6DF4FE00189259 /* EventCountdownUITests.swift */; };
 		1B15FC312C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC302C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift */; };
 		1B15FC452C71B25600189259 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC442C71B25600189259 /* CodableColor.swift */; };
-		1B15FC472C7227B100189259 /* EventSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC462C7227B100189259 /* EventSummaryView.swift */; };
-		1B15FC4A2C75F0C200189259 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC492C75F0C200189259 /* EventListViewModel.swift */; };
-		1B1BEC8B2C6F79A100C83485 /* eventEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8A2C6F79A100C83485 /* eventEditorView.swift */; };
+		1B15FC472C7227B100189259 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15FC462C7227B100189259 /* EventRow.swift */; };
+		1B1BEC8B2C6F79A100C83485 /* EventForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8A2C6F79A100C83485 /* EventForm.swift */; };
 		1B1BEC8E2C6F7A9100C83485 /* event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8D2C6F7A9100C83485 /* event.swift */; };
 		1B1BEC902C6F9C1700C83485 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1BEC8F2C6F9C1700C83485 /* Cache.swift */; };
-		1BCDF3702C76252E0072F9AC /* EventEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCDF36F2C76252E0072F9AC /* EventEditViewModel.swift */; };
+		1BCDF3722C771E060072F9AC /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCDF3712C771E060072F9AC /* EventViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +42,7 @@
 /* Begin PBXFileReference section */
 		1B15FC102C6DF4FD00189259 /* EventCountdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventCountdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B15FC132C6DF4FD00189259 /* EventCountdownApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCountdownApp.swift; sourceTree = "<group>"; };
-		1B15FC152C6DF4FD00189259 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1B15FC152C6DF4FD00189259 /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
 		1B15FC172C6DF4FE00189259 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B15FC1A2C6DF4FE00189259 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B15FC202C6DF4FE00189259 /* EventCountdownTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventCountdownTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,12 +51,11 @@
 		1B15FC2E2C6DF4FE00189259 /* EventCountdownUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCountdownUITests.swift; sourceTree = "<group>"; };
 		1B15FC302C6DF4FE00189259 /* EventCountdownUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCountdownUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1B15FC442C71B25600189259 /* CodableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableColor.swift; sourceTree = "<group>"; };
-		1B15FC462C7227B100189259 /* EventSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSummaryView.swift; sourceTree = "<group>"; };
-		1B15FC492C75F0C200189259 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
-		1B1BEC8A2C6F79A100C83485 /* eventEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventEditorView.swift; sourceTree = "<group>"; };
+		1B15FC462C7227B100189259 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
+		1B1BEC8A2C6F79A100C83485 /* EventForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventForm.swift; sourceTree = "<group>"; };
 		1B1BEC8D2C6F7A9100C83485 /* event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event.swift; sourceTree = "<group>"; };
 		1B1BEC8F2C6F9C1700C83485 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
-		1BCDF36F2C76252E0072F9AC /* EventEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditViewModel.swift; sourceTree = "<group>"; };
+		1BCDF3712C771E060072F9AC /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +109,7 @@
 				1B15FC132C6DF4FD00189259 /* EventCountdownApp.swift */,
 				1B15FC482C75F0A700189259 /* observables */,
 				1B1BEC8C2C6F7A8000C83485 /* model */,
-				1B15FC152C6DF4FD00189259 /* ContentView.swift */,
+				1B15FC152C6DF4FD00189259 /* EventsView.swift */,
 				1B15FC412C6E390D00189259 /* views */,
 				1B15FC172C6DF4FE00189259 /* Assets.xcassets */,
 				1B15FC192C6DF4FE00189259 /* Preview Content */,
@@ -147,8 +145,8 @@
 		1B15FC412C6E390D00189259 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				1B1BEC8A2C6F79A100C83485 /* eventEditorView.swift */,
-				1B15FC462C7227B100189259 /* EventSummaryView.swift */,
+				1B1BEC8A2C6F79A100C83485 /* EventForm.swift */,
+				1B15FC462C7227B100189259 /* EventRow.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -156,8 +154,7 @@
 		1B15FC482C75F0A700189259 /* observables */ = {
 			isa = PBXGroup;
 			children = (
-				1B15FC492C75F0C200189259 /* EventListViewModel.swift */,
-				1BCDF36F2C76252E0072F9AC /* EventEditViewModel.swift */,
+				1BCDF3712C771E060072F9AC /* EventViewModel.swift */,
 			);
 			path = observables;
 			sourceTree = "<group>";
@@ -303,14 +300,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B1BEC8E2C6F7A9100C83485 /* event.swift in Sources */,
-				1BCDF3702C76252E0072F9AC /* EventEditViewModel.swift in Sources */,
 				1B1BEC902C6F9C1700C83485 /* Cache.swift in Sources */,
 				1B15FC452C71B25600189259 /* CodableColor.swift in Sources */,
-				1B1BEC8B2C6F79A100C83485 /* eventEditorView.swift in Sources */,
-				1B15FC162C6DF4FD00189259 /* ContentView.swift in Sources */,
-				1B15FC4A2C75F0C200189259 /* EventListViewModel.swift in Sources */,
+				1B1BEC8B2C6F79A100C83485 /* EventForm.swift in Sources */,
+				1B15FC162C6DF4FD00189259 /* EventsView.swift in Sources */,
+				1BCDF3722C771E060072F9AC /* EventViewModel.swift in Sources */,
 				1B15FC142C6DF4FD00189259 /* EventCountdownApp.swift in Sources */,
-				1B15FC472C7227B100189259 /* EventSummaryView.swift in Sources */,
+				1B15FC472C7227B100189259 /* EventRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

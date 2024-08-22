@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct EventSummaryView: View {
+struct EventRow: View {
     
-    let event: Event
+    @Binding var event: Event
 
     @State private var countDown = ""
 
@@ -31,11 +31,8 @@ struct EventSummaryView: View {
     }
 }
 
-#Preview {
-    EventSummaryView(event: Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red))
-}
 
 func countDownString (from date: Date, to now: Date, update countDown: inout String) {
     countDown = RelativeDateTimeFormatter().localizedString(for: date, relativeTo: now)
-    
 }
+
