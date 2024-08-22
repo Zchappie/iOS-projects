@@ -47,13 +47,12 @@ struct ContentView: View {
                     }
                     
                     .navigationDestination(for: Event.self) { event in
-                        eventEditorView(formType: .edit(event), onSave: {event in replaceEvent(event: event, events: &events)})
+                        eventEditorView(formType: .edit(event), onSave: {event in updateEventsAndSortBaseOnDate(event: event, events: &events)})
                     }
                     .toolbar {
                         ToolbarItem(placement: .primaryAction){
                             NavigationLink {
-                                let newEvent = Event(id: .init(), title: "", date: Date.now, textColor: .black)
-                                eventEditorView(formType: .add, onSave: {newEvent in events.append(newEvent)})
+                                eventEditorView(formType: .add, onSave: {event in updateEventsAndSortBaseOnDate(event: event, events: &events)})
                             } label: {
                                 Image(systemName: "plus")
                             }
@@ -71,8 +70,11 @@ struct ContentView: View {
     ])
 }
 
-func replaceEvent(event: Event, events: inout [Event]) {
+func updateEventsAndSortBaseOnDate(event: Event, events: inout [Event]) {
     if let index = events.firstIndex(where: { $0.id == event.id }) {
         events[index] = event
+    } else {
+        events.append(event)
     }
+    events.sort{ $0.date < $1.date }
 }

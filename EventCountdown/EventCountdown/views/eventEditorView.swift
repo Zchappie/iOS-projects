@@ -16,14 +16,15 @@ struct eventEditorView: View {
     var onSave: (Event) -> Void
     var formType: FormType
     
+    // using key path to point to a provided environment values by SwiftUI, without caring the detailed implementation. e.g., what to dismiss.
     @Environment(\.dismiss) var dismiss
     
-    
-    // Initializer to set up the state variables based on the mode
     init(formType: FormType, onSave: @escaping (Event) -> Void) {
         self.formType = formType
         self.onSave = onSave
         
+        
+        // re-initialize the state properties through `_` based on the mode, through this we have the full access to state property
         switch formType {
         case .add:
             _id = State(initialValue: UUID())
