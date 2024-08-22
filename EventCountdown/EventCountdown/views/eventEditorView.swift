@@ -58,11 +58,12 @@ struct eventEditorView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
-                        let updatedEvent = Event(id: id, title: title, date: date, textColor: textColor)
+                        let updatedEvent = Event(id: id, title: title.trimmingCharacters(in: .whitespaces), date: date, textColor: textColor)
                         onSave(updatedEvent)
                         dismiss()
                     }
                     .fontWeight(.semibold)
+                    .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
             }
         }
