@@ -78,5 +78,5 @@ func updateEventsAndSortBaseOnDate(event: Event, events: inout [Event]) {
         print("Not finding event in the list")
         events.append(event)
     }
-    events.sort{ $0.date < $1.date }
+    events.sort{ $0 < $1 }
 }
