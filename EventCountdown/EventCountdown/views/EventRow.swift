@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EventRow: View {
     
+    // not using @State property, I don't need it. It is blocking the deletion 
     var event: Event
 
     @State private var countDown = ""
