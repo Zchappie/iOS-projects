@@ -31,6 +31,9 @@ struct EventRow: View {
         }
     }
 }
+#Preview {
+    EventRow(event: Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red))
+}
 
 
 func countDownString (from date: Date, to now: Date, update countDown: inout String) {
