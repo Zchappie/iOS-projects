@@ -10,21 +10,28 @@ import SwiftUI
 @main
 struct EventCountdownApp: App {
     
-    // TODO: using viewModel for Caching
     // TODO: using EnvironmentObject for Caching
-    var cacheEvents = InMemoryCache()
-    var fileCache = JSONFileManagerCache()
-    
-    // TODO: using Binding State for Events
-    var events = [
-        Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red), Event(id: .init(), title: "🏝️ Holiday", date: .init(), textColor: .blue)
-    ]
-    
-    // TODO: load events from the JSONFileManagerCache, and store in InMemoryCache
+//    @EnvironmentObject var eventsCacheJSON : JSONFileManagerCache
+    @StateObject var fileCache = JSONFileManagerCache()
+    @State private var events: [Event] = []
+
+    init() {
+        if let loadedEvents = fileCache.load() {
+            self._events = State(initialValue: loadedEvents)
+        } else {
+            self._events = State(initialValue: [
+                Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red),
+                Event(id: .init(), title: "🏝️ Holiday", date: .init(), textColor: .blue)
+            ])
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
             EventsView(events: events)
+                .environmentObject(fileCache)
         }
     }
 }
+
+

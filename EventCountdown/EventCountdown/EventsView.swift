@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EventsView: View {
     
+    @EnvironmentObject var fileCache: JSONFileManagerCache
     @State var events: [Event]
     
     var body: some View {
@@ -37,6 +38,7 @@ struct EventsView: View {
                                 .swipeActions {
                                     Button("Delete") {
                                         events.remove(at: idx)
+                                        fileCache.save(events: events)
                                     }
                                     .tint(.red)
                                 }
@@ -62,28 +64,20 @@ struct EventsView: View {
             }
         }
     }
+    
+    private func updateEventsAndSortBaseOnDate(event: Event, events: inout [Event]) {
+        if let index = events.firstIndex(where: { $0.id == event.id }) {
+            events[index] = event
+            print("Update result \(events[index].title)")
+        } else {
+            print("New event added to the list")
+            events.append(event)
+        }
+        events.sort{ $0 < $1 }
+        fileCache.save(events: events)
+    }
 }
 
 #Preview {
-    EventsView(events: [
-//        Event(id: .init(), title: "🥳 Birthday", date: .init(), textColor: .red), Event(id: .init(), title: "🏝️ Holiday", date: .init(), textColor: .blue)
-    ])
-}
-
-private func updateEventsAndSortBaseOnDate(event: Event, events: inout [Event]) {
-    if let index = events.firstIndex(where: { $0.id == event.id }) {
-        events[index] = event
-        print("Update result \(events[index].title)")
-    } else {
-        print("Not finding event in the list")
-        events.append(event)
-    }
-    events.sort{ $0 < $1 }
-}
-
-// Function to delete an event
-private func deleteEvent(delete event: Event, from events: inout [Event]) {
-    if let index = events.firstIndex(where: { $0.id == event.id }) {
-        events.remove(at: index)
-    }
+    EventsView(events: [])
 }

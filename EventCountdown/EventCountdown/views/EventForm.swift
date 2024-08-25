@@ -33,7 +33,6 @@ struct EventForm: View {
             _title = State(initialValue: "")
             _date = State(initialValue: .now)
             _textColor = State(initialValue: .black)
-            print("New event added")
         case .edit(let event):
             _id = State(initialValue: event.id)
             _title = State(initialValue: event.title)
@@ -63,7 +62,6 @@ struct EventForm: View {
                     Button("Save") {
                         let updatedEvent = Event(id: id, title: title, date: date, textColor: textColor)
                         onSave(updatedEvent)
-                        print("\(updatedEvent.title), \(updatedEvent.date), \(updatedEvent.textColor)")
                         dismiss()
                     }
                     .fontWeight(.semibold)

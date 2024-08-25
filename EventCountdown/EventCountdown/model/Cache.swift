@@ -14,7 +14,7 @@ protocol Cache {
 
 // TODO: Change to additive update
 /// `FileSystemCache`: This implementation should utilize the file system to persist and retrieve the list of events. Utilize Swift's `FileManager` to handle file operations.
-final class JSONFileManagerCache: Cache {
+final class JSONFileManagerCache: Cache, ObservableObject {
     
     private let filePath: String
     private let fileManager: FileManager
@@ -38,6 +38,7 @@ final class JSONFileManagerCache: Cache {
         do {
             let jsonData = try self.encoder.encode(events)
             try jsonData.write(to: self.logURL)
+            print("Data saved in \(self.logURL.absoluteString)")
         } catch {
             print("Fail to save the events a local file")
         }
@@ -57,7 +58,7 @@ final class JSONFileManagerCache: Cache {
 }
 
 /// `InMemoryCache`: : Keeps events in an array or similar structure during the session. This won't retain events across different app launches, but serves as a quick in-session cache.
-final class InMemoryCache: Cache {
+final class InMemoryCache: Cache, ObservableObject {
     private var eventCache: [Event] = []
     
     func save(events: [Event]) {
