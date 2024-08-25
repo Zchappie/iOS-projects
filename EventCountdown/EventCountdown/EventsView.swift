@@ -33,7 +33,7 @@ struct EventsView: View {
                     }
                 } else {
                     List(events.indices, id: \.self) { idx in NavigationLink(value: events[idx]) {
-                            EventRow(event: $events[idx])
+                            EventRow(event: events[idx])
                                 .swipeActions {
                                     Button("Delete") {
                                         events.remove(at: idx)
@@ -70,7 +70,7 @@ struct EventsView: View {
     ])
 }
 
-func updateEventsAndSortBaseOnDate(event: Event, events: inout [Event]) {
+private func updateEventsAndSortBaseOnDate(event: Event, events: inout [Event]) {
     if let index = events.firstIndex(where: { $0.id == event.id }) {
         events[index] = event
         print("Update result \(events[index].title)")
@@ -79,4 +79,11 @@ func updateEventsAndSortBaseOnDate(event: Event, events: inout [Event]) {
         events.append(event)
     }
     events.sort{ $0 < $1 }
+}
+
+// Function to delete an event
+private func deleteEvent(delete event: Event, from events: inout [Event]) {
+    if let index = events.firstIndex(where: { $0.id == event.id }) {
+        events.remove(at: index)
+    }
 }

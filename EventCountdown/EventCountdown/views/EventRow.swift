@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EventRow: View {
     
-    @Binding var event: Event
+    var event: Event
 
     @State private var countDown = ""
 
