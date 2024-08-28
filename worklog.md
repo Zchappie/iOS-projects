@@ -1,5 +1,8 @@
 # Worklog
 
+## 2024-08-28
+Very neat trick to format on save: https://medium.com/@jozott/format-on-save-xcode-swift-8133d049b3ac
+
 ## 2024-08-14
 Gestures all follow the similar rule:
 ```swift

@@ -1,10 +1,8 @@
 import Foundation
 import SwiftUI
+import SwiftData
 
-/**
- * This file acts as a mock database for temporary data storage, providing CRUD functionality.
- * It is essential to remove this file before the final project submission.
- */
+
 
 @Observable
 final class Storage {
