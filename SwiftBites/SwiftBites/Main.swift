@@ -1,8 +1,13 @@
 import SwiftUI
+import SwiftData
 
 /// The main view that appears when the app is launched.
 struct ContentView: View {
-  @Environment(\.storage) private var storage
+    @Environment(\.modelContext) private var context
+    
+    @Query var recipes: [Recipe]
+    @Query var ingredients: [Ingredient]
+    @Query var categories: [Category]
 
   var body: some View {
     TabView {
@@ -20,9 +25,6 @@ struct ContentView: View {
         .tabItem {
           Label("Ingredients", systemImage: "carrot")
         }
-    }
-    .onAppear {
-      storage.load()
     }
   }
 }
