@@ -13,6 +13,7 @@ struct EventForm: View {
     @State private var title: String = ""
     @State private var date: Date = Date()
     @State private var textColor: Color = .black
+    private var formTitle: String = ""
     var onSave: (Event) -> Void
     var formType: FormType
     
@@ -33,11 +34,13 @@ struct EventForm: View {
             _title = State(initialValue: "")
             _date = State(initialValue: .now)
             _textColor = State(initialValue: .black)
+            formTitle = "Add Event"
         case .edit(let event):
             _id = State(initialValue: event.id)
             _title = State(initialValue: event.title)
             _date = State(initialValue: event.date)
             _textColor = State(initialValue: event.textColor)
+            formTitle = "Edit \(title)"
         }
     }
     
@@ -55,7 +58,7 @@ struct EventForm: View {
                     ColorPicker("Text color", selection: $textColor)
                 }
             }
-            .navigationTitle("\(titleForFormType(formType)) \(title)")
+            .navigationTitle("\(formTitle)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -89,8 +92,8 @@ enum FormType {
 func titleForFormType(_ formType: FormType) -> String {
     switch formType {
     case .add:
-        return "Add"
+        return "Add Event"
     case .edit(_):
-        return "Edit"
+        return "Edit "
     }
 }
